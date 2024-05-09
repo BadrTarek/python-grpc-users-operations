@@ -1,0 +1,4 @@
+# For Testing 
+pytest
+coverage
+pytest-env

@@ -1,0 +1,12 @@
+# Project dependencies:
+requests
+flask
+sqlalchemy
+alembic
+python-dotenv
+psycopg2
+pydantic 
+protobuf-to-pydantic
+asyncio
+asyncpg
+grpcio-reflection
