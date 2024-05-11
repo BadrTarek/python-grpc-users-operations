@@ -24,15 +24,18 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-
       - name: Install requirements
         run: |
           pip install -r requirements.txt    
-          pip install coverage   
+          pip install -r requirements-test.txt  
       
       - name: Make Unit Test
         run: |
             make unit-test  
+      
+      - name: Make Integration Test
+        run: |
+            make integration-test
         env:
           DB_USER: postgres
           DB_PASSWORD: postgres
