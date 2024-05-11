@@ -1,7 +1,7 @@
 import logging
 import sys
 from grpc_user_ops.domain.interfaces.logger_interface import ILoggerInterface
-
+from grpc_user_ops.config.data_settings import LOGGING_FILE, LOGGING_LEVEL
 
 
 class DefaultLogger(ILoggerInterface):
@@ -9,15 +9,15 @@ class DefaultLogger(ILoggerInterface):
     def __init__(self) -> None:     
         # Create and configure logger
         self.logger = logging.getLogger()
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(LOGGING_LEVEL)
 
         # Create console handler and set level to debug
         console_handler = logging.StreamHandler(sys.stdout)
-        console_handler.setLevel(logging.DEBUG)
+        console_handler.setLevel(LOGGING_LEVEL)
 
         # Create file handler and set level to debug
-        file_handler = logging.FileHandler('grpc-user-ops.log')
-        file_handler.setLevel(logging.DEBUG)
+        file_handler = logging.FileHandler(LOGGING_FILE)
+        file_handler.setLevel(LOGGING_LEVEL)
 
         # Create formatter
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
