@@ -5,7 +5,7 @@ import uuid
 from grpc_user_ops.domain.interfaces.unit_of_work_interface import IUnitOfWork
 from grpc_user_ops.domain.interfaces.repositories.user_repository_interface import IUserRepository
 from grpc_user_ops.domain.interfaces.logger_interface import ILoggerInterface
-
+from sqlalchemy import Result
 
 
 def generate_mock_user_entity() -> MagicMock:
@@ -51,6 +51,8 @@ def generate_mock_unit_of_work(mocked_user_repository:MagicMock) -> AsyncMock:
     mock_uow.user_repository = mocked_user_repository
     mock_uow.commit.return_value = None
     mock_uow.add.return_value = None
+    mock_uow.flush_and_refresh.return_value = None
+    mock_uow.execute.return_value = MagicMock(Result)
     mock_uow.__aenter__.return_value = None
     mock_uow.__aexit__.return_value = None
     return mock_uow
