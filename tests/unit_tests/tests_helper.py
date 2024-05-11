@@ -4,6 +4,7 @@ from datetime import datetime
 import uuid
 from grpc_user_ops.domain.interfaces.unit_of_work_interface import IUnitOfWork
 from grpc_user_ops.domain.interfaces.repositories.user_repository_interface import IUserRepository
+from grpc_user_ops.domain.interfaces.logger_interface import ILoggerInterface
 
 
 
@@ -33,8 +34,19 @@ def generate_mock_user_repository(mocked_user) -> AsyncMock:
     return user_repository
 
 
+def generate_mock_logger() -> AsyncMock:
+    logger = MagicMock( ILoggerInterface ) 
+    logger.info.return_value = None 
+    logger.debug.return_value = None 
+    logger.error.return_value = None 
+    logger.critical.return_value = None 
+    logger.warning.return_value = None 
+    return logger
+
+
 def generate_mock_unit_of_work(mocked_user_repository:MagicMock) -> AsyncMock:
     mock_uow = AsyncMock(IUnitOfWork)
+    mock_uow.logger = generate_mock_logger()
     mock_uow.start_database_connection.return_value = None
     mock_uow.user_repository = mocked_user_repository
     mock_uow.commit.return_value = None
