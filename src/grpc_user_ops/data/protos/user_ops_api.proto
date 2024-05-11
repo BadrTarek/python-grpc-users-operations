@@ -1,0 +1,23 @@
+syntax = "proto3";
+package user_ops;
+
+import "protos_models/user.proto"; // Add the missing import statement
+
+
+message GetUserRequest {
+    string id = 1;
+}
+
+message DeleteUserRequest {
+    string id = 1;
+}
+
+message Empty {}
+
+// The ping service definition.
+service UserOpsApi {
+    rpc CreateUser(models.User) returns (models.User) ;
+    rpc GetUser(GetUserRequest) returns (models.User) ;
+    rpc UpdateUser(models.User) returns (Empty) ;
+    rpc DeleteUser(DeleteUserRequest) returns (Empty) ;
+}
