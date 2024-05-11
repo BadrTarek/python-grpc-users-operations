@@ -1,9 +1,8 @@
 run:
-	cls
 	py .\src\grpc_user_ops\run_grpc_server.py
 
-test: 
-	coverage run -m pytest -s .\tests\
+unit-test: 
+	coverage run -m pytest -s .\tests\unit_tests\
 
 migrations:
 	alembic revision --autogenerate -m "$(migration_name)"
