@@ -4,6 +4,9 @@ run:
 unit-test: 
 	coverage run -m pytest -s .\tests\unit_tests\
 
+integration-test: 
+	coverage run -m pytest -s .\tests\integration_tests\
+
 migrations:
 	alembic revision --autogenerate -m "$(migration_name)"
 

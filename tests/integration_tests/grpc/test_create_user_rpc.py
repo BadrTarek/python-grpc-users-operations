@@ -1,8 +1,6 @@
-from concurrent import futures
 import grpc
-from grpc_user_ops.app.grpc.grpc_servicer import GRPCUserOPSServicer
 from grpc_user_ops.data.database.sqlalchemy_unit_of_work import SqlAlchemyUnitOfWork
-from grpc_user_ops.user_ops_api_pb2_grpc import add_UserOpsApiServicer_to_server, UserOpsApiStub
+from grpc_user_ops.user_ops_api_pb2_grpc import UserOpsApiStub
 from grpc_user_ops.config import data_settings
 import unittest
 from grpc_user_ops.protos_models.user_pb2 import (
@@ -10,22 +8,19 @@ from grpc_user_ops.protos_models.user_pb2 import (
 )
 from grpc_user_ops.data.logger.default_logger import DefaultLogger
 import pytest
+from tests.integration_tests.test_helper import generate_grpc_test_server   
 
 
-class RPCGreeterServerTest(unittest.IsolatedAsyncioTestCase):
+class RPCCreateUserTest(unittest.IsolatedAsyncioTestCase):
     
     def setUp(self):
-        self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=data_settings.MAX_WORKERS))
-        
-        add_UserOpsApiServicer_to_server(GRPCUserOPSServicer(), self.server)
-
-        self.server.add_insecure_port(f"[::]:{str(data_settings.GRPC_SERVER_PORT)}")
-        
-        self.server.start()
+        self.server = generate_grpc_test_server()
         
         self.logger = DefaultLogger()
         
-        self.uow = SqlAlchemyUnitOfWork(self.logger) 
+        self.uow = SqlAlchemyUnitOfWork(self.logger)
+        
+        self.server.start()
 
 
     def tearDown(self):
