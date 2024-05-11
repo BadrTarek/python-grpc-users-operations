@@ -1,0 +1,40 @@
+name: Build gRPC User Operations Service
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+
+  Build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v1
+
+
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt    
+          pip install coverage   
+      
+      - name: Make Unit Test
+        run: |
+            make unit-test  
+        env:
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          DB_HOST: localhost
+          DB_PORT: 5432
