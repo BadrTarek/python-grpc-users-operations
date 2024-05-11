@@ -1,6 +1,4 @@
 # Project dependencies:
-requests
-flask
 sqlalchemy
 alembic
 python-dotenv
@@ -10,3 +8,4 @@ protobuf-to-pydantic
 asyncio
 asyncpg
 grpcio-reflection
+grpcio_tools
