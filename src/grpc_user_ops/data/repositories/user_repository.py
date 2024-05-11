@@ -21,18 +21,12 @@ class UserRepository(IUserRepository):
             await self.uow.flush_and_refresh( user_dal )
         user =  User.model_construct(**user_dal.__dict__)
         return user
-
-
-    async def list(self) -> List[User]:
-        stmt = select(UserDal).order_by(UserDal.created_at)
-        result:Result = await self.uow.execute(stmt)
-        return [User(**user_dal.__dict__) for user_dal in result.scalars().all()]
     
     
     async def get(self, user_id:uuid.UUID) -> User:
         stmt = select(UserDal).filter_by(id = user_id)
         result:Result = await self.uow.execute(stmt)
-        return User(**result.scalars().one().__dict__)
+        return User.model_construct(**result.scalars().one().__dict__)
     
     
     async def update(self,user:User) -> None:        
