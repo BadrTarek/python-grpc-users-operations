@@ -16,6 +16,10 @@ def map_exceptions_to_grpc_abort(func):
             logger.error(f"NotFoundError: {str(exc)}")
             context:grpc.ServicerContext = args[2]
             context.abort(grpc.StatusCode.NOT_FOUND,str(exc))
+        except Exception as exc:            
+            logger.error(f"UnhandledError: {str(exc)}")
+            context:grpc.ServicerContext = args[2]
+            context.abort(grpc.StatusCode.INTERNAL)
     
     return wrapper
 
