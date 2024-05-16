@@ -18,11 +18,11 @@ class IUserRepository(ABC):
     
     
     @abstractmethod
-    async def update(self,user:User) -> None:       
+    async def update(self,user:User) -> int:       
         raise NotImplementedError
     
     
     @abstractmethod
-    async def delete(self, user_id:uuid.UUID) -> None:      
+    async def delete(self, user_id:uuid.UUID) -> int:      
         raise NotImplementedError
     
