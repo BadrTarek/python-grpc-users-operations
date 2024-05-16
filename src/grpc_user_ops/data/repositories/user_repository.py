@@ -3,9 +3,10 @@ from grpc_user_ops.domain.interfaces.repositories.user_repository_interface impo
 from grpc_user_ops.data.database.models import UserDal
 from grpc_user_ops.domain.interfaces.unit_of_work_interface import IUnitOfWork
 from sqlalchemy import select, update,delete
-from typing import List
+from typing import List, Optional
 import uuid
 from sqlalchemy import Result
+from sqlalchemy.engine.cursor import CursorResult
 
 class UserRepository(IUserRepository):
     
@@ -26,18 +27,23 @@ class UserRepository(IUserRepository):
     async def get(self, user_id:uuid.UUID) -> User:
         stmt = select(UserDal).filter_by(id = user_id)
         result:Result = await self.uow.execute(stmt)
-        return User.model_construct(**result.scalars().one().__dict__)
+        user_dal:Optional[UserDal] = result.scalars().one_or_none()
+        if user_dal is not None:
+            return User.model_construct(**user_dal.__dict__)
+        return None
     
     
-    async def update(self,user:User) -> None:        
+    async def update(self,user:User) -> int:        
         query = update(UserDal).where(UserDal.id ==user.id).values(
             name = user.name,   
             phone = user.phone,
             email = user.email
         )
-        await self.uow.execute(query)
+        result:CursorResult = await self.uow.execute(query)
+        return result.rowcount
     
     
-    async def delete(self, user_id:uuid.UUID) -> None:        
+    async def delete(self, user_id:uuid.UUID) -> int:        
         query = delete(UserDal).where(UserDal.id ==user_id)
-        await self.uow.execute(query)
+        result:CursorResult = await self.uow.execute(query)
+        return result.rowcount
