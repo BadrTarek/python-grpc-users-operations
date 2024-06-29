@@ -1,0 +1,23 @@
+syntax = "proto3";
+package user_operations_protobufs;
+
+import "protobufs/protobufs_models/user.proto"; 
+
+
+message GetUserRequest {
+    string id = 1;
+}
+
+message DeleteUserRequest {
+    string id = 1;
+}
+
+message Empty {}
+
+// The ping service definition.
+service UserOpsApi {
+    rpc CreateUser(protobufs_models.User) returns (protobufs_models.User) ;
+    rpc GetUser(GetUserRequest) returns (protobufs_models.User) ;
+    rpc UpdateUser(protobufs_models.User) returns (Empty) ;
+    rpc DeleteUser(DeleteUserRequest) returns (Empty) ;
+}
