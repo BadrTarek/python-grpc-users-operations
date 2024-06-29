@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import AsyncMock
 from grpc_user_ops.app.grpc.views.user_views.create_user_grpc_view import CreateUserGrpcView
-from grpc_user_ops.protos_models.user_pb2 import User
+from protobufs.protobufs_models.user_pb2 import User
 from tests.unit_tests.tests_helper import (
     generate_mock_user_entity,
     generate_mock_unit_of_work,

@@ -1,7 +1,7 @@
 from concurrent import futures
 import grpc
 from grpc_user_ops.app.grpc.grpc_servicer import GRPCUserOPSServicer
-from grpc_user_ops.user_ops_api_pb2_grpc import add_UserOpsApiServicer_to_server
+from protobufs.user_ops_api_pb2_grpc import add_UserOpsApiServicer_to_server
 from grpc_user_ops.config import data_settings
 
 

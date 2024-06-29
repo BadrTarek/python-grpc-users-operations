@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import AsyncMock
 from grpc_user_ops.app.grpc.views.user_views.delete_user_grpc_view import DeleteUserGrpcView
-from grpc_user_ops.user_ops_api_pb2 import Empty, DeleteUserRequest
+from protobufs.user_ops_api_pb2 import Empty, DeleteUserRequest
 from tests.unit_tests.tests_helper import (
     generate_mock_user_entity,
     generate_mock_unit_of_work,

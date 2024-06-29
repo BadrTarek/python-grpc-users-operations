@@ -1,9 +1,9 @@
 import grpc
 from grpc_user_ops.data.database.sqlalchemy_unit_of_work import SqlAlchemyUnitOfWork
-from grpc_user_ops.user_ops_api_pb2_grpc import UserOpsApiStub
+from protobufs.user_ops_api_pb2_grpc import UserOpsApiStub
 from grpc_user_ops.config import data_settings
 import unittest
-from grpc_user_ops.protos_models.user_pb2 import (
+from protobufs.protobufs_models.user_pb2 import (
     User
 )
 from grpc_user_ops.data.logger.default_logger import DefaultLogger
