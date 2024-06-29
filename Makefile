@@ -1,3 +1,7 @@
+install:
+	pip install -r requirements.txt
+	pip install -e src/ 
+
 run:
 	py run_grpc_server.py
 
