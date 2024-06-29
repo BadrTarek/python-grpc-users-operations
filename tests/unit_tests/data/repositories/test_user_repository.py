@@ -45,8 +45,9 @@ class TestUserRepository(unittest.IsolatedAsyncioTestCase):
 
     @pytest.mark.asyncio
     async def test_get(self):
-        await self.user_repository.get(uuid.uuid4())
+        user = await self.user_repository.get(uuid.uuid4())
         self.mock_uow.execute.assert_called_once()
+        self.assertIsNotNone(user)
 
 
 
