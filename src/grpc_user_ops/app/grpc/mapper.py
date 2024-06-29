@@ -1,5 +1,5 @@
 
-from grpc_user_ops.protos_models.user_pb2 import (
+from protobufs.protobufs_models.user_pb2 import (
     User
 )
 from google.protobuf.json_format import ParseDict

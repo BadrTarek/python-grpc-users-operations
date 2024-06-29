@@ -3,15 +3,15 @@ from grpc_user_ops.app.grpc.views.user_views.get_user_grpc_view import GetUserGr
 from grpc_user_ops.app.grpc.views.user_views.delete_user_grpc_view import DeleteUserGrpcView
 from grpc_user_ops.app.grpc.views.user_views.update_user_grpc_view import UpdateUserGrpcView
 from grpc_user_ops.data.database.sqlalchemy_unit_of_work import SqlAlchemyUnitOfWork
-from grpc_user_ops.protos_models.user_pb2 import (
+from protobufs.protobufs_models.user_pb2 import (
     User
 )
-from grpc_user_ops.user_ops_api_pb2 import (
+from protobufs.user_ops_api_pb2  import (
     GetUserRequest,
     DeleteUserRequest,
     Empty
 )
-from grpc_user_ops.user_ops_api_pb2_grpc import UserOpsApiServicer
+from protobufs.user_ops_api_pb2_grpc import UserOpsApiServicer
 from grpc_user_ops.data.logger.default_logger import DefaultLogger
 import grpc
 from grpc_user_ops.app.middleware.grpc_view_exception_handler import exceptions_handler_middleware
