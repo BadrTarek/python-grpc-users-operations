@@ -52,7 +52,7 @@ def generate_mock_unit_of_work(mocked_user_repository:MagicMock) -> AsyncMock:
     mock_uow.commit.return_value = None
     mock_uow.add.return_value = None
     mock_uow.flush_and_refresh.return_value = None
-    mock_uow.execute.return_value = MagicMock(Result)
+    mock_uow.execute.return_value = MagicMock(Result, rowcount = 1)
     mock_uow.__aenter__.return_value = None
     mock_uow.__aexit__.return_value = None
     return mock_uow
