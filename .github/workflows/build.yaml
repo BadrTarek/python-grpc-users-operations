@@ -29,6 +29,10 @@ jobs:
           pip install -r requirements.txt    
           pip install -r requirements-test.txt  
       
+      - name: Generate Protobufs files
+        run: |
+            make generate-protos  
+
       - name: Make Unit Test
         run: |
             make unit-test  
