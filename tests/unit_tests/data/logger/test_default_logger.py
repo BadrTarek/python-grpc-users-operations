@@ -7,8 +7,8 @@ from grpc_user_ops.data.logger.default_logger import DefaultLogger
 class TestDefaultLogger(unittest.TestCase):
 
     @classmethod
-    def setUpClass(self):
-        self.logger = DefaultLogger()
+    def setUpClass(cls):
+        cls.logger = DefaultLogger()
     
     def test_info(self):
         message = "This is an info message"
