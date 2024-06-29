@@ -68,10 +68,15 @@ The project is structured into four main layers:
 
 3. **Install dependencies**:
     ```bash
-    pip install -r requirements.txt
+    make install
     ```
 
-4. **Configure the application**:
+4. **Generate Compiled Protobufs Files**:
+    ```bash
+    make generate-protos
+    ```
+
+5. **Configure the application**:
     Create a copy of the [.env.example](./.env.example) file, rename it to **.env**, and add your environment variables.
 
     Example `.env`:
