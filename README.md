@@ -56,8 +56,8 @@ The project is structured into four main layers:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/BadrTarek/grpc-users-ops
-    cd grpc-users-ops
+    git clone https://github.com/BadrTarek/python-grpc-users-operations
+    cd python-grpc-users-operations
     ```
 
 2. **Create a virtual environment** (optional but recommended):
