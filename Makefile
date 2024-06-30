@@ -3,7 +3,7 @@ install:
 	pip install -e src/ 
 
 run:
-	py run_grpc_server.py
+	py src/run_grpc_server.py
 
 unit-test: 
 	pytest -s tests/unit_tests/
