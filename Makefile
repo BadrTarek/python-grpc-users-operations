@@ -2,17 +2,19 @@ install:
 	pip install -r requirements.txt
 	pip install -e src/ 
 
-run:
-	py src/run_grpc_server.py
+start:
+	python src/run_grpc_server.py
 
-unit-test: 
+install-test: install
+	pip install -r requirements-test.txt
+
+unit-test: install-test
 	pytest -s tests/unit_tests/
 
-integration-test: 
+integration-test: install-test
 	pytest -s tests/integration_tests/
 
 test: install
-	pip install -r requirements-test.txt
 	$(MAKE) unit-test
 	$(MAKE) integration-test
 

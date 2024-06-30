@@ -2,7 +2,7 @@
 sqlalchemy
 alembic
 python-dotenv
-psycopg2
+psycopg2-binary
 pydantic 
 protobuf-to-pydantic
 asyncio
