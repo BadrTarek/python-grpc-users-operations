@@ -98,7 +98,7 @@ The project is structured into four main layers:
 
 1. **Run the gRPC server**:
     ```bash
-    make run
+    make start
     ```
 
 2. **Using the gRPC client**:
