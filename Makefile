@@ -11,6 +11,11 @@ unit-test:
 integration-test: 
 	pytest -s tests/integration_tests/
 
+test: install
+	pip install -r requirements-test.txt
+	$(MAKE) unit-test
+	$(MAKE) integration-test
+
 migrations:
 	alembic -c .\src\grpc_user_ops\config\alembic.ini revision --autogenerate -m "$(migration_name)"
 
