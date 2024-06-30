@@ -19,7 +19,7 @@ def map_exceptions_to_grpc_abort(func):
         except Exception as exc:            
             logger.error(f"UnhandledError: {str(exc)}")
             context:grpc.ServicerContext = args[2]
-            context.abort(grpc.StatusCode.INTERNAL)
+            context.abort(grpc.StatusCode.INTERNAL, "Internal Server Error")
     
     return wrapper
 
