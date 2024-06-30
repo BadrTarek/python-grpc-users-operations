@@ -77,7 +77,7 @@ The project is structured into four main layers:
     ```
 
 5. **Configure the application**:
-    Create a copy of the [.env.example](./.env.example) file, rename it to **.env**, and add your environment variables.
+    Create a copy of the [.env.example](./src/grpc_user_ops/config/.env.example) file, rename it to **.env** in the same path, and add your environment variable values.
 
     Example `.env`:
     ```YAML

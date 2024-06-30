@@ -12,10 +12,10 @@ integration-test:
 	pytest -s tests/integration_tests/
 
 migrations:
-	alembic revision --autogenerate -m "$(migration_name)"
+	alembic -c .\src\grpc_user_ops\config\alembic.ini revision --autogenerate -m "$(migration_name)"
 
 migrate: 
-	alembic upgrade head
+	alembic -c .\src\grpc_user_ops\config\alembic.ini upgrade head
 
 generate-protos:
-	python -m grpc_tools.protoc -I src/grpc_user_ops/data/ --python_out=. --grpc_python_out=. src/grpc_user_ops/data/protobufs/user_ops_api.proto src/grpc_user_ops/data/protobufs/protobufs_models/user.proto 
+	python -m grpc_tools.protoc -I src/grpc_user_ops/data/ --python_out=src/ --grpc_python_out=src/ src/grpc_user_ops/data/protobufs/user_ops_api.proto src/grpc_user_ops/data/protobufs/protobufs_models/user.proto 

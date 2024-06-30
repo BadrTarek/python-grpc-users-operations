@@ -3,7 +3,7 @@ from dotenv import load_dotenv,find_dotenv
 import logging
 
 
-load_dotenv(find_dotenv(".env",raise_error_if_not_found=False))
+load_dotenv(find_dotenv("src/grpc_user_ops/config/.env",raise_error_if_not_found=False))
 
 
 # Database Configuration
