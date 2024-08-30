@@ -30,7 +30,7 @@ def handle_test_database_per_session():
         # Execute SQL command to create a new database for testing
         cursor.execute(f"CREATE DATABASE {DB_NAME}")
         yield conn
-    except:
+    except Exception:
         yield conn
     finally:
         try:
