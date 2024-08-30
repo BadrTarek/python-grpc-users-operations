@@ -1,6 +1,6 @@
 import pytest
 import sqlalchemy
-from grpc_user_ops.data.database.models import Base
+from grpc_user_ops.data.database import models 
 from sqlalchemy.orm.session import close_all_sessions
 import psycopg2
 from grpc_user_ops.config.data_settings import (
@@ -63,10 +63,11 @@ def handle_test_database_tables_per_test_case():
         )
     )
     # create tables before each testcase
-    Base.metadata.create_all(engine)
+    models.load_all_models()
+    models.base.AsyncBase.metadata.create_all(engine)
     
     yield engine
     
     # drop tables after each testcase
-    Base.metadata.drop_all(engine)
+    models.base.AsyncBase.metadata.drop_all(engine)
     close_all_sessions()
