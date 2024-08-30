@@ -16,7 +16,7 @@ def serve():
     if data_settings.SERVE_INSECURE:
         server.add_insecure_port(f"[::]:{str(data_settings.GRPC_SERVER_PORT)}")
     else:
-        server_credentials= grpc.ssl_server_credentials()
+        server_credentials= grpc.ssl_server_credentials(None)
         server.add_secure_port(f"[::]:{str(data_settings.GRPC_SERVER_PORT)}", server_credentials)
 
     # Use server reflection
