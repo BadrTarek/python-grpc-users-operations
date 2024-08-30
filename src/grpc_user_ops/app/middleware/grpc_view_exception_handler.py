@@ -12,7 +12,7 @@ def map_exceptions_to_grpc_abort(func):
         except ValidationError as exc:            
             logger.error(f"ValidationError: {str(exc)}")
             context:grpc.ServicerContext = args[2]
-            formatted_errors:str = str(format_pydantic_errors(exc))
+            formatted_errors:str = str(format_pydantic_errors(exc.errors()))
             context.abort(grpc.StatusCode.INVALID_ARGUMENT,formatted_errors)
         except NotFound as exc:            
             logger.error(f"NotFoundError: {str(exc)}")
