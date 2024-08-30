@@ -1,6 +1,6 @@
 from grpc_user_ops.domain.entities.user import User
 from grpc_user_ops.domain.interfaces.repositories.user_repository_interface import IUserRepository
-from grpc_user_ops.data.database.models import UserDal
+from grpc_user_ops.data.database.models.user_dal import UserDal
 from grpc_user_ops.domain.interfaces.unit_of_work_interface import IUnitOfWork
 from sqlalchemy import select, update,delete
 from typing import List, Optional
