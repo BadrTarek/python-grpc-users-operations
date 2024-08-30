@@ -12,6 +12,7 @@ from grpc_user_ops.config.data_settings import (
 from sqlalchemy.ext.asyncio import create_async_engine,async_sessionmaker
 import asyncio 
 from sqlalchemy import Result
+from grpc_user_ops.data.database.models import load_all_models
 
 # Repositories
 from grpc_user_ops.data.repositories.user_repository import UserRepository
@@ -52,6 +53,7 @@ class SqlAlchemyUnitOfWork(IUnitOfWork):
 
 
     async def __aenter__(self):
+        load_all_models()  
         await self.start_database_connection()
         self.construct_repositories()
         async with self.__async_session.begin() as session:

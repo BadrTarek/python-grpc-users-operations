@@ -11,7 +11,7 @@ from grpc_user_ops.config.data_settings import (
     DB_USER,
     DB_PASSWORD,
 )
-from grpc_user_ops.data.database.models import Base
+from grpc_user_ops.data.database import models 
 
 
 # this is the Alembic Config object, which provides
@@ -23,9 +23,10 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+models.load_all_models()
 
 # for 'autogenerate' support
-target_metadata = Base.metadata
+target_metadata = models.base.AsyncBase.metadata
 
 
 # other values from the config, defined by the needs of env.py,
