@@ -2,6 +2,7 @@ from pydantic import ValidationError
 import grpc
 from grpc_user_ops.domain.interfaces.logger_interface import ILoggerInterface
 from grpc_user_ops.domain.errors.not_found import NotFound
+from grpc_user_ops.domain.utils import format_pydantic_errors
 
 def map_exceptions_to_grpc_abort(func):
     def wrapper(*args, **kwargs):
@@ -11,7 +12,8 @@ def map_exceptions_to_grpc_abort(func):
         except ValidationError as exc:            
             logger.error(f"ValidationError: {str(exc)}")
             context:grpc.ServicerContext = args[2]
-            context.abort(grpc.StatusCode.INVALID_ARGUMENT,str(exc))
+            formatted_errors:str = str(format_pydantic_errors(exc))
+            context.abort(grpc.StatusCode.INVALID_ARGUMENT,formatted_errors)
         except NotFound as exc:            
             logger.error(f"NotFoundError: {str(exc)}")
             context:grpc.ServicerContext = args[2]
