@@ -19,12 +19,13 @@ def serve():
         server_credentials= grpc.ssl_server_credentials(None)
         server.add_secure_port(f"[::]:{str(data_settings.GRPC_SERVER_PORT)}", server_credentials)
 
-    # Use server reflection
-    SERVICE_NAMES = (
-        user_ops_api_pb2.DESCRIPTOR.services_by_name["UserOpsApi"].full_name,
-        reflection.SERVICE_NAME,
-    )
-    reflection.enable_server_reflection(SERVICE_NAMES, server)
+    if data_settings.GRPC_SERVICE_REFLECTION:
+        # Use server reflection
+        SERVICE_NAMES = (
+            user_ops_api_pb2.DESCRIPTOR.services_by_name["UserOpsApi"].full_name,
+            reflection.SERVICE_NAME,
+        )
+        reflection.enable_server_reflection(SERVICE_NAMES, server)
     
     server.start()
     

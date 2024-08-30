@@ -19,6 +19,7 @@ DB_PASSWORD = os.environ.get("DB_PASSWORD","")
 MAX_WORKERS = int(os.environ.get("MAX_WORKERS","10"))
 GRPC_SERVER_PORT = int(os.environ.get("GRPC_SERVER_PORT","50051"))
 SERVE_INSECURE = bool(os.environ.get("SERVE_INSECURE", "1"))
+GRPC_SERVICE_REFLECTION = bool(os.environ.get("GRPC_SERVICE_REFLECTION", "1"))
 
 # Logging Configuration
 __LOG_LEVELS_IN_STR = {
