@@ -8,23 +8,13 @@ from protobufs.protobufs_models.user_pb2 import (
 )
 from grpc_user_ops.data.logger.default_logger import DefaultLogger
 import pytest
-from tests.integration_tests.test_helper import generate_grpc_test_server   
 
 
 class RPCCreateUserTest(unittest.IsolatedAsyncioTestCase):
     
     def setUp(self):
-        self.server = generate_grpc_test_server()
-        
         self.logger = DefaultLogger()
-        
         self.uow = SqlAlchemyUnitOfWork(self.logger)
-        
-        self.server.start()
-
-
-    def tearDown(self):
-        self.server.stop(None)
 
     @pytest.mark.asyncio
     async def test_success_create_user(self):

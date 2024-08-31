@@ -9,25 +9,14 @@ from protobufs.user_ops_api_pb2 import (
 )
 from grpc_user_ops.data.logger.default_logger import DefaultLogger
 import pytest
-from tests.integration_tests.test_helper import generate_grpc_test_server   
 from grpc_user_ops.domain.entities.user import User as UserEntity
 
 
 class RPCDeleteUserTest(unittest.IsolatedAsyncioTestCase):
     
     def setUp(self):
-        self.server = generate_grpc_test_server()
-        
         self.logger = DefaultLogger()
-        
         self.uow = SqlAlchemyUnitOfWork(self.logger)
-        
-        self.server.start()
-
-
-    def tearDown(self):
-        self.server.stop(None)
-
 
     @pytest.mark.asyncio
     async def test_success_delete_user(self):
