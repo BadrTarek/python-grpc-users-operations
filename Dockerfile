@@ -1,9 +1,13 @@
-FROM python:3.8-alpine AS app
+FROM python:3.8-alpine
 
 # Install the required packages
 RUN apk update && \
     apk add --no-cache \
-    make && \
+    build-base  \
+    libffi-dev \
+    make \
+    python3 \
+    python3-dev &&\
     pip install --upgrade pip
 
 # Copy the project files into the image
@@ -25,9 +29,11 @@ RUN make install && \
     rm requirements-test.txt && \
     rm requirements.txt
 
+# Set the environment variables
+ENV GRPC_SERVER_PORT=50051
 
 # Expose the gRPC server port
-EXPOSE 50051
+EXPOSE $GRPC_SERVER_PORT
 
 # Run the gRPC server when the container starts
 ENTRYPOINT ["make", "start"]
